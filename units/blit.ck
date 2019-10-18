@@ -80,7 +80,7 @@ function void modDelayMix(Echo delay, dur modTime, float min, float max, float a
     }
 }
 
-function void runBlit() {
+function void runBlit(time end) {
     while(true) {
         for(0 => int step; step < 8; step++) {
             (Math.random2(0, 40) :: ms, Math.random2(10, 60) :: ms, .8, Math.random2(20, 100) :: ms) => adsr.set;
@@ -107,16 +107,21 @@ function void runBlit() {
                 adsr.releaseTime() => now;
             }        
         }
+
+        if (now >= end) {                        
+            break;
+        }
     }
+
+    <<< "end" >>>;
 }
 
-//tempo.note * 16 => now;
-tempo.note * 8 => now;
+tempo.note * 16 => now;
 
 spork ~ modVolume(blit, tempo.note * 4, .075, .125, .01);
 spork ~ modStereo(stereo, tempo.note * 3, -1.0, 1.0, .1);
 spork ~ modDelayMix(delay, tempo.note * 12, .05, .35, .01);
 
-spork ~ runBlit();
+spork ~ runBlit(now + (tempo.note * 81));
 
-tempo.note * 77 => now;
+tempo.note * 85 => now;

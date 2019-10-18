@@ -1,7 +1,7 @@
 me.arg(0) => string filename;
 
 if (filename.length() == 0) {
-    "i cant do this.wav" => filename;
+    "i cant do this - lead - 121bpm.wav" => filename;
 }
 
 dac => WvOut2 w => blackhole;

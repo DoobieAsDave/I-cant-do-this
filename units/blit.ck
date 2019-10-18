@@ -112,13 +112,11 @@ function void runBlit(time end) {
             break;
         }
     }
-
-    <<< "end" >>>;
 }
 
 tempo.note * 16 => now;
 
-spork ~ modVolume(blit, tempo.note * 4, .075, .125, .01);
+spork ~ modVolume(blit, tempo.note * 4, .075, .15, .01);
 spork ~ modStereo(stereo, tempo.note * 3, -1.0, 1.0, .1);
 spork ~ modDelayMix(delay, tempo.note * 12, .05, .35, .01);
 
